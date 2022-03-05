@@ -27,6 +27,19 @@ contract Sorter {
     // 1. Implement Bubble sort iteratively (do NOT modify the type signature)
     function iterativeBubbleSort(uint[] memory _data) public pure returns (uint[] memory) {
         // TODO Implement Here
+        bool swapped = false;
+        uint n = uint(_data.length);
+        do {
+            swapped = false;
+            for (uint i = 0; i < n - 1; i++) {
+                if (_data[i] > _data[i+1]) {
+                    uint temp = _data[i];
+                    _data[i] = _data[i+1];
+                    _data[i+1] = temp;
+                    swapped = true;
+                }
+            }
+        } while(swapped != false);
         return _data;
     }
 
@@ -34,6 +47,17 @@ contract Sorter {
     // Hint: What happens after 1 pass of bubble sort?
     function recursiveBubbleSort(uint[] memory _data, uint8 _size) public returns (uint[] memory) {
         // TODO Implement Here
-        return _data;
+        if (_size == 1) {
+            return _data;
+        }
+
+        for (uint i = 0; i < _size-1; i++) {
+            if (_data[i] > _data[i+1]) {
+                uint temp = _data[i];
+                _data[i] = _data[i+1];
+                _data[i+1] = temp;
+            }
+        }
+        return recursiveBubbleSort(_data, _size-1);        
     }
 }
